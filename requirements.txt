@@ -1,0 +1,6 @@
+Django==5.0.7
+beautifulsoup4==4.12.2
+fpdf==1.7.2
+pandas==2.0.1
+python-docx==0.8.11
+Pillow==10.0.0
