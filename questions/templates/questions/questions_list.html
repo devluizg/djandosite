@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Questões</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Questões</h1>
+        <a href="{% url 'adicionar_questao' %}" class="btn btn-primary">Adicionar Questão</a>
+        
+        <form method="post" action="{% url 'gerar_simulados' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success mt-3">Gerar Simulados</button>
+        </form>
+
+        <ul class="list-group mt-4">
+            {% for question in questions %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{ question.enunciado|safe }}</span>
+                    <div>
+                        <!-- Botão Editar -->
+                        <a href="{% url 'editar_questao' question.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        
+                        <!-- Botão Excluir -->
+                        <form method="post" action="{% url 'excluir_questao' question.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir esta questão?');">Excluir</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

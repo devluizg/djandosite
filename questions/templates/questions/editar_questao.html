@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Questão</title>
+    <link rel="stylesheet" href="{% static 'questions/styles.css' %}">
+</head>
+<body>
+    <h1>Editar Questão com Imagem</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="enunciado">Enunciado:</label>
+        <textarea id="enunciado" name="enunciado" rows="5" required>{{ form.enunciado.value|striptags }}</textarea>
+
+        <label for="imagem">Escolha uma Imagem:</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" multiple>
+        <br><br>
+
+        <label for="disciplina">Disciplina:</label>
+        <input type="text" id="disciplina" name="disciplina" value="{{ form.disciplina.value }}" required>
+        <br><br>
+
+        <label for="gabarito">Gabarito:</label>
+        <input type="text" id="gabarito" name="gabarito" value="{{ form.gabarito.value }}" required>
+        <br><br>
+
+        <button type="submit">Salvar Alterações</button>
+        <a href="{% url 'lista_questoes' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</body>
+</html>
